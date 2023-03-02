@@ -1,3 +1,7 @@
+[![.NET](https://github.com/aimenux/IpCli/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aimenux/IpCli/actions/workflows/ci.yml)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=IpCli-Key&metric=coverage)](https://sonarcloud.io/summary/new_code?id=IpCli-Key)
+![Nuget](https://img.shields.io/nuget/v/IpCli)
+
 # IpCli
 ```
 A net global tool helping to retrieve ip infos
