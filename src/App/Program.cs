@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using App.Commands;
 using App.Configuration;
 using App.Extensions;
@@ -46,12 +47,19 @@ public static class Program
             .ConfigureServices((hostingContext, services) =>
             {
                 services
-                    .AddHttpClient<IIpService, IpService>()
-                    .SetHandlerLifetime(TimeSpan.FromMinutes(5))
-                    .AddPolicyHandler(GetRetryPolicy());
-                services.AddTransient<ToolCommand>();
+                    .Configure<Settings>(hostingContext.Configuration.GetSection(nameof(Settings)))
+                    .PostConfigure<Settings>(settings =>
+                    {
+                        var distinctUrls = settings.SourceUrls.Distinct();
+                        settings.SourceUrls = distinctUrls.ToArray();
+                    });
+                    
                 services.AddTransient<IConsoleService, ConsoleService>();
-                services.Configure<Settings>(hostingContext.Configuration.GetSection(nameof(Settings)));
+                services.AddTransient<ToolCommand>();
+                services
+                    .AddHttpClient<IIpService, IpService>()
+                    .SetHandlerLifetime(TimeSpan.FromMinutes(2))
+                    .AddPolicyHandler(GetRetryPolicy());
             })
             .AddSerilog();
     
