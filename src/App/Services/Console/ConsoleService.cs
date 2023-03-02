@@ -144,8 +144,8 @@ public class ConsoleService : IConsoleService
                 ToMarkup(privateIp.NetworkName),
                 ToMarkup(privateIp.NetworkType),
                 ToMarkup(privateIp.NetworkStatus),
-                ToMarkup(privateIp.IpV4),
-                ToMarkup(privateIp.IpV6));
+                ToMarkup(privateIp.IpV4 ?? Emoji.Known.CrossMark),
+                ToMarkup(privateIp.IpV6 ?? Emoji.Known.CrossMark));
         }
 
         AnsiConsole.WriteLine();
@@ -162,11 +162,11 @@ public class ConsoleService : IConsoleService
             .AddColumn(new TableColumn("[u]SourceUrl[/]").Centered())
             .AddColumn(new TableColumn("[u]IpV4[/]").Centered());
 
-        foreach (var privateIp in publicIps)
+        foreach (var publicIp in publicIps)
         {
             table.AddRow(
-                ToMarkup(privateIp.SourceUrl),
-                ToMarkup(privateIp.IpV4 ?? Emoji.Known.CrossMark));
+                ToMarkup(publicIp.SourceUrl),
+                ToMarkup(publicIp.IpV4 ?? Emoji.Known.CrossMark));
         }
 
         AnsiConsole.WriteLine();

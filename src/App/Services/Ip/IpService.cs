@@ -21,16 +21,17 @@ public class IpService : IIpService
             var networkName = networkInterface.Name;
             var networkType = networkInterface.NetworkInterfaceType.ToString();
             var networkStatus = networkInterface.OperationalStatus.ToString();
+
+            var ipProperties = networkInterface.GetIPProperties();
+            var ipAddresses = ipProperties.UnicastAddresses;
+
+            var ipv4 = ipAddresses.Count >= 2
+                ? ipAddresses[1].Address.ToString()
+                : null;
             
-            var ipv4 = networkInterface.GetIPProperties()
-                .UnicastAddresses[1]
-                .Address
-                .ToString();
-            
-            var ipv6 = networkInterface.GetIPProperties()
-                .UnicastAddresses[0]
-                .Address
-                .ToString();
+            var ipv6 = ipAddresses.Count >= 1
+                ? ipAddresses[0].Address.ToString()
+                : null;
 
             var privateIp = new PrivateIp
             {
