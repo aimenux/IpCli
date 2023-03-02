@@ -50,8 +50,11 @@ public static class Program
                     .Configure<Settings>(hostingContext.Configuration.GetSection(nameof(Settings)))
                     .PostConfigure<Settings>(settings =>
                     {
-                        var distinctUrls = settings.SourceUrls.Distinct();
-                        settings.SourceUrls = distinctUrls.ToArray();
+                        var distinctUrls = settings.SourceUrls
+                            .Where(url => !string.IsNullOrWhiteSpace(url))
+                            .Distinct()
+                            .ToArray();
+                        settings.SourceUrls = distinctUrls;
                     });
                     
                 services.AddTransient<IConsoleService, ConsoleService>();

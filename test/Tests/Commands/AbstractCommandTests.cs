@@ -3,6 +3,7 @@ using App.Configuration;
 using App.Services.Console;
 using App.Validators;
 using FluentAssertions;
+using FluentValidation.Results;
 using McMaster.Extensions.CommandLineUtils;
 
 namespace Tests.Commands;
@@ -45,6 +46,24 @@ public class AbstractCommandTests
         result.Should().Be(Settings.ExitCode.Ko);
     }
     
+    [Fact]
+    public async Task Should_Return_Also_Ko()
+    {
+        // arrange
+        var app = new CommandLineApplication();
+        var service = new FakeConsoleService();
+        var command = new AnotherFakeCommand(service)
+        {
+            Job = () => Task.CompletedTask
+        };
+        
+        // act
+        var result = await command.OnExecuteAsync(app);
+
+        // assert
+        result.Should().Be(Settings.ExitCode.Ko);
+    }
+    
     private class FakeCommand : AbstractCommand
     {
         public Func<Task> Job { get; init; }
@@ -62,6 +81,20 @@ public class AbstractCommandTests
         {
             validationErrors = ValidationErrors.New<FakeCommand>();
             return true;
+        }
+    }
+
+    private class AnotherFakeCommand : FakeCommand
+    {
+        public AnotherFakeCommand(IConsoleService consoleService) : base(consoleService)
+        {
+        }
+
+        protected override bool HasValidOptionsAndArguments(out ValidationErrors validationErrors)
+        {
+            var failures = new[] { new ValidationFailure() };
+            validationErrors = ValidationErrors.New<FakeCommand>(failures);
+            return false;
         }
     }
 }

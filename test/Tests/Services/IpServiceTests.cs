@@ -13,7 +13,8 @@ public class IpServiceTests
         {
             SourceUrls = new List<string>
             {
-                "https://ipinfo.io/ip"
+                "https://ipinfo.io/ip",
+                "https://url.not.exist"
             }
         };
         using var httpClient = new HttpClient();
@@ -34,7 +35,8 @@ public class IpServiceTests
         {
             SourceUrls = new List<string>
             {
-                "https://ipinfo.io/ip"
+                "https://ipinfo.io/ip",
+                "https://url.not.exist"
             }
         };
         using var httpClient = new HttpClient();
