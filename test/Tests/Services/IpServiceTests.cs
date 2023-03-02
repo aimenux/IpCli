@@ -9,7 +9,13 @@ public class IpServiceTests
     public async Task Should_Get_PrivateIps()
     {
         // arrange
-        var parameters = new IpParameters();
+        var parameters = new IpParameters
+        {
+            SourceUrls = new List<string>
+            {
+                "https://ipinfo.io/ip"
+            }
+        };
         using var httpClient = new HttpClient();
         var ipService = new IpService(httpClient);
 
@@ -24,7 +30,13 @@ public class IpServiceTests
     public async Task Should_Get_PublicIps()
     {
         // arrange
-        var parameters = new IpParameters();
+        var parameters = new IpParameters
+        {
+            SourceUrls = new List<string>
+            {
+                "https://ipinfo.io/ip"
+            }
+        };
         using var httpClient = new HttpClient();
         var ipService = new IpService(httpClient);
 

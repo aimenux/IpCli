@@ -2,5 +2,5 @@ namespace App.Services.Ip;
 
 public class IpParameters
 {
-    public ICollection<string> SourceUrls { get; set; }
+    public ICollection<string> SourceUrls { get; init; }
 }
