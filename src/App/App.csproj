@@ -24,6 +24,7 @@
 		<Deterministic>true</Deterministic>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<EnablePackageValidation>true</EnablePackageValidation>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
 
