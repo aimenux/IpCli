@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using App.Services.Console;
 using App.Services.Ip;
 using App.Validators;
@@ -25,21 +26,21 @@ public class FakeConsoleService : IConsoleService
 
     public void RenderException(Exception exception)
     {
+        Debug.WriteLine(exception);
     }
 
-    public Task RenderStatusAsync(Func<Task> action)
+    public async Task RenderStatusAsync(Func<Task> action)
     {
-        return Task.CompletedTask;
+        await action.Invoke();
     }
 
-    public Task<T> RenderStatusAsync<T>(Func<Task<T>> func)
+    public async Task<T> RenderStatusAsync<T>(Func<Task<T>> func)
     {
-        return Task.FromResult(default(T));
+        return await func.Invoke();
     }
 
     public void RenderValidationErrors(ValidationErrors validationErrors)
     {
-        throw new NotImplementedException();
     }
 
     public Task CopyTextToClipboardAsync(string text, CancellationToken cancellationToken)
