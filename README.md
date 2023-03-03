@@ -9,7 +9,7 @@ A net global tool helping to retrieve ip infos
 
 > In this repo, i m building a global tool that allows to retrieve ip infos.
 >
-> The tool is based on multiple sub commmands :
+> The tool is based on multiple sub commands :
 > - Use sub command `Public` to get public ip infos
 > - Use sub command `Private` to get private ip infos
 
