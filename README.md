@@ -31,6 +31,7 @@ A net global tool helping to retrieve ip infos
 > To uninstall global tool, type these command :
 > - `dotnet tool uninstall -g IpCli`
 >
->
+> ![IpCli](Screenshots/IpCli.png)
+> 
 
 **`Tools`** : vs22, net 6.0/7.0, command-line, spectre-console, polly, fluent-validation, fluent-assertions, xunit

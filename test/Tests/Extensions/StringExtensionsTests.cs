@@ -38,4 +38,33 @@ public class StringExtensionsTests
         // assert
         areEquals.Should().BeFalse();
     }
+    
+    [Theory]
+    [InlineData("127.0.0.1")]
+    [InlineData("102.25.511.52")]
+    [InlineData("202.22.452.561")]
+    public void Should_Be_Valid_IpV4(string ipV4)
+    {
+        // arrange
+        // act
+        var ok = ipV4.IsValidIpV4();
+
+        // assert
+        ok.Should().BeTrue();
+    }
+    
+    [Theory]
+    [InlineData("")]
+    [InlineData(null)]
+    [InlineData("127")]
+    [InlineData("127.0.0")]
+    public void Should_Not_Be_Valid_IpV4(string ipV4)
+    {
+        // arrange
+        // act
+        var ok = ipV4.IsValidIpV4();
+
+        // assert
+        ok.Should().BeFalse();
+    }
 }
