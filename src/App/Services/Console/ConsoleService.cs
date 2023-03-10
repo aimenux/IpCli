@@ -56,6 +56,14 @@ public class ConsoleService : IConsoleService
         AnsiConsole.WriteLine();
     }
 
+    public void RenderUserSecretsFile(string filepath)
+    {
+        if (!OperatingSystem.IsWindows()) return;
+        if (!File.Exists(filepath)) return;
+        if (!GetYesOrNoAnswer("display user secrets", false)) return;
+        RenderSettingsFile(filepath);
+    }
+    
     public void RenderException(Exception exception) => RenderAnyException(exception);
 
     public static void RenderAnyException<T>(T exception) where T : Exception
@@ -91,6 +99,13 @@ public class ConsoleService : IConsoleService
                 ctx.Spinner(spinner);
                 return await func.Invoke();
             });
+    }
+    
+    public bool GetYesOrNoAnswer(string text, bool defaultAnswer)
+    {
+        if (AnsiConsole.Confirm($"Do you want to [u]{text}[/] ?", defaultAnswer)) return true;
+        AnsiConsole.WriteLine();
+        return false;
     }
 
     public void RenderValidationErrors(ValidationErrors validationErrors)

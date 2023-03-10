@@ -10,9 +10,11 @@ public interface IConsoleService
     void RenderVersion(string version);
     void RenderText(string text, Color color);
     void RenderSettingsFile(string filePath);
+    void RenderUserSecretsFile(string filepath);
     void RenderException(Exception exception);
     Task RenderStatusAsync(Func<Task> action);
     Task<T> RenderStatusAsync<T>(Func<Task<T>> func);
+    bool GetYesOrNoAnswer(string text, bool defaultAnswer);
     void RenderValidationErrors(ValidationErrors validationErrors);
     Task CopyTextToClipboardAsync(string text, CancellationToken cancellationToken);
     void RenderPrivateIps(ICollection<PrivateIp> privateIps);

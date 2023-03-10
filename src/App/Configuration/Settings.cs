@@ -19,6 +19,7 @@ public sealed class Settings
         public const string FriendlyName = @"IpCli";
         public const string Description = @"A net global tool helping to retrieve ip infos.";
         public static readonly string Version = GetInformationalVersion().Split("+").FirstOrDefault();
+        public static readonly string UserSecretsFile = $@"C:\Users\{Environment.UserName}\AppData\Roaming\Microsoft\UserSecrets\IpCli-UserSecrets\secrets.json";
         
         private static string GetInformationalVersion() 
         {

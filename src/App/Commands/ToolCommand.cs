@@ -23,8 +23,10 @@ public class ToolCommand : AbstractCommand
     {
         if (ShowSettings)
         {
-            var filePath = GetSettingFilePath();
-            ConsoleService.RenderSettingsFile(filePath);
+            var settingFile = GetSettingFilePath();
+            var userSecretsFile = Settings.Cli.UserSecretsFile;
+            ConsoleService.RenderSettingsFile(settingFile);
+            ConsoleService.RenderUserSecretsFile(userSecretsFile);
         }
         else if (ShowVersion)
         {

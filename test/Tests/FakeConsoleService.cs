@@ -24,6 +24,10 @@ public class FakeConsoleService : IConsoleService
     {
     }
 
+    public void RenderUserSecretsFile(string filepath)
+    {
+    }
+
     public void RenderException(Exception exception)
     {
         Debug.WriteLine(exception);
@@ -37,6 +41,11 @@ public class FakeConsoleService : IConsoleService
     public async Task<T> RenderStatusAsync<T>(Func<Task<T>> func)
     {
         return await func.Invoke();
+    }
+
+    public bool GetYesOrNoAnswer(string text, bool defaultAnswer)
+    {
+        return true;
     }
 
     public void RenderValidationErrors(ValidationErrors validationErrors)
